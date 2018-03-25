@@ -6,6 +6,18 @@ module Trailblazer
         def self.call(adds)
           tripletts = adds_to_tripletts(adds)
 
+# puts "@@@@ #{tripletts[0][0]}"
+          # tripletts[0][0] = [] # FIXME: make the first run in the Generate algorithm not consider magnetic to
+          # puts "@@@@@@@@@"
+          # pp tripletts
+if tripletts.any?
+          tripletts = [[[],
+            *tripletts[0][1..-1]]] +
+            tripletts[1..-1]
+end
+
+          # pp tripletts
+
           circuit_hash = tripletts_to_circuit_hash( tripletts )
 
           circuit_hash_to_process( circuit_hash )
@@ -17,6 +29,7 @@ module Trailblazer
           alterations.to_a
         end
 
+        # Effectively returns a Sequence with the effective order of tasks to insert into the graph.
         def self.adds_to_alterations(adds)
           alterations = DSL::Alterations.new
 

@@ -48,7 +48,7 @@ module Trailblazer
               Polarization.new( output: output, color: start_color ),
               # TODO: this is a pseudo-"merge" and should be public API at some point.
             # TODO: we also need to merge all the other states such as debug.
-              adds[1..-1] # drop start
+              adds
             ]
           elsif task.is_a?(Activity::DSL::Track) # An additional plus polarization. Example: Output => :success
             [

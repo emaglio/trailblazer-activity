@@ -25,24 +25,7 @@ module Trailblazer
 
         # @return [Adds] list of Adds instances that can be chained or added to an existing sequence.
         def self.InitialAdds(**options)
-          StartAdds(**options) + EndAdds(**options)
-        end
-
-        # TODO: make this nicer.
-        def self.StartAdds(track_color:, end_semantic:, start_outputs: {success: self.default_outputs[:success]}, **)
-          builder_options={ track_color: track_color, end_semantic: end_semantic }
-
-          adds(
-            Activity::Start.new(semantic: :default),
-
-            TaskPolarizations(builder_options),
-
-            {}, { group: :start },
-
-            id:           "Start.default",
-            magnetic_to:  [],
-            plus_poles:   PlusPoles.initial(start_outputs), # FIXME: this is actually redundant with Normalizer
-          )
+          EndAdds(**options)
         end
 
         # TODO: make this nicer.
